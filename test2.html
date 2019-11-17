@@ -1,107 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="application">
 <head>
-  <script src="js/lib/aws-cognito-sdk.js"></script>
-  <!-- <script src="amazon-cognito-identity.min.js"></script> -->
-  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.16.0.min.js"></script>
-  <script src="./app.js"></script>
-  <meta charset="UTF-8">
-  <title>Rekognition</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/lib/jquery-3.4.1.min.js"></script>
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+    <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+    <script src="js/lib/webcam.min.js"></script>
+    <title>Document</title>
 </head>
+<body ng-controller="storeController as store">
+   
 
-<body>
-  <H1>Age Estimator</H1>
-  <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
-  <p id="opResult"></p>
-</body>
+
+
 <script>
-
-  document.getElementById("fileToUpload").addEventListener("change", function (event) {
-    ProcessImage();
-  }, false);
-  
-  //Calls DetectFaces API and shows estimated ages of detected faces
-  function DetectFaces(imageData) {
-    AWS.region = "RegionToUse";
-    var rekognition = new AWS.Rekognition();
-    var params = {
-      Image: {
-        Bytes: imageData
-      },
-      Attributes: [
-        'ALL',
-      ]
-    };
-    rekognition.detectFaces(params, function (err, data) {
-      if (err) console.log(err, err.stack); // an error occurred
-      else {
-       var table = "<table><tr><th>Low</th><th>High</th></tr>";
-        // show each face and build out estimated age table
-        for (var i = 0; i < data.FaceDetails.length; i++) {
-          table += '<tr><td>' + data.FaceDetails[i].AgeRange.Low +
-            '</td><td>' + data.FaceDetails[i].AgeRange.High + '</td></tr>';
-        }
-        table += "</table>";
-        document.getElementById("opResult").innerHTML = table;
-      }
-    });
-  }
-  //Loads selected image and unencodes image bytes for Rekognition DetectFaces API
-  function ProcessImage() {
-    AnonLog();
-    var control = document.getElementById("fileToUpload");
-    var file = control.files[0];
-
-    // Load base64 encoded image 
-    var reader = new FileReader();
-    reader.onload = (function (theFile) {
-      return function (e) {
-        var img = document.createElement('img');
-        var image = null;
-        img.src = e.target.result;
-        var jpg = true;
-        try {
-          image = atob(e.target.result.split("data:image/jpeg;base64,")[1]);
-
-        } catch (e) {
-          jpg = false;
-        }
-        if (jpg == false) {
-          try {
-            image = atob(e.target.result.split("data:image/png;base64,")[1]);
-          } catch (e) {
-            alert("Not an image file Rekognition can process");
-            return;
-          }
-        }
-        //unencode image bytes for Rekognition DetectFaces API 
-        var length = image.length;
-        imageBytes = new ArrayBuffer(length);
-        var ua = new Uint8Array(imageBytes);
-        for (var i = 0; i < length; i++) {
-          ua[i] = image.charCodeAt(i);
-        }
-        //Call Rekognition  
-        DetectFaces(imageBytes);
-      };
-    })(file);
-    reader.readAsDataURL(file);
-  }
-  //Provides anonymous log on to AWS services
-  function AnonLog() {
-    
-    // Configure the credentials provider to use your identity pool
-    AWS.config.region = 'ap-southeast-1'; // Region
-    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: 'ap-southeast-1:2a0e91cc-d0be-45db-8d01-a1c14d15cd48',
-    });
-    // Make the call to obtain credentials
-    AWS.config.credentials.get(function () {
-      // Credentials will be available when this function is called.
-      var accessKeyId = AWS.config.credentials.accessKeyId;
-      var secretAccessKey = AWS.config.credentials.secretAccessKey;
-      var sessionToken = AWS.config.credentials.sessionToken;
-    });
-  }
+    $.ajax({
+					   type: "POST",
+             url: "http://localhost:59013/api/Rekognition/Example/03.jpg/hackaws",
+             headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    },
+					   success: function(result) {
+						console.log(result);
+					   }
+					 });
 </script>
+
+<button ng-click="take_snapshot()">Take Snapshot</button>
+</body>
 </html>
