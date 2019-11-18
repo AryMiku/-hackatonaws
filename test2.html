@@ -18,18 +18,46 @@
 
 
 <script>
-    $.ajax({
+    // $.ajax({
+	// 				   type: "POST",
+    //          url: "http://localhost:59013/api/Rekognition/Example/03.jpg/hackaws",
+    //          headers: {
+    //                     'Content-Type': 'application/x-www-form-urlencoded'
+    //         },
+	// 		success: function(result) {
+	// 			console.log(result);
+	// 		}
+    // });
+    
+        function apitest(){
+            var myFile = $( '#fileinput' )[0].files[0];
+            console.log(myFile);
+
+            var formData = new FormData();
+            console.log($('#fileinput').prop('files')[0]);
+            formData.append('image', $('#fileinput').prop('files')[0]); 
+
+            $.ajax({
 					   type: "POST",
-             url: "http://localhost:59013/api/Rekognition/Example/03.jpg/hackaws",
-             headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    },
-					   success: function(result) {
-						console.log(result);
-					   }
-					 });
+             url: "http://localhost:8080/api/file/upload",
+             data: myFile ,
+             contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+             processData: false, // NEEDED, DON'T OMIT THIS,
+			success: function(result) {
+				console.log(result);
+			}
+    });
+
+        }
+
 </script>
 
 <button ng-click="take_snapshot()">Take Snapshot</button>
+
+<button onclick="apitest()">test</button>
+<input type="file" id="fileinput" name="file"/>
+
+<img src="https://hackaws.s3-ap-southeast-1.amazonaws.com/05.jpg" alt="">
+
 </body>
 </html>
