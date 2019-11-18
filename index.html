@@ -14,15 +14,145 @@
 </head>
 <body ng-controller="storeController as store">
    
-
-<div id="my_camera" style="width:320px; height:240px;"></div>
-<div id="my_result"></div>
-
-<script language="JavaScript">
-    Webcam.attach( '#my_camera' );
-
-</script>
-
-<button ng-click="take_snapshot()">Take Snapshot</button>
+<div class="container-fluid">
+    <div style="display: flex; justify-content: space-evenly; background: #0095CA!important; border-top-left-radius: 2.5px; border-top-right-radius: 2.5px;">
+        <h1 class="display-1" style="color: white;">Inventorest</h1>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div style="display: flex; justify-content: center; background: lightgray; padding-top: 15px; padding-bottom: 15px; border-bottom-left-radius: 2.5px; border-bottom-right-radius: 2.5px;">
+                <div class="card" style="width: 40rem; ">
+                        <div class="card-img-top" style="display: flex; justify-content: center;">
+                                <div id="my_camera" style="width:560px; height:480px;"></div>
+                                <script language="JavaScript">
+                                    Webcam.attach( '#my_camera' );
+                                </script>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Pictures Analysis</h5>
+                            <p class="card-text">Take pictures of friends to confirm identity.</p>
+                        <div style="display: flex; justify-content: space-evenly;">
+                            <button class="btn btn-primary btn-lg active" style="width: 40%;" ng-click="take_snapshot()" data-toggle="modal" data-target="#exampleModal">Withdraw</button>
+                            <button class="btn btn-primary btn-lg active" style="width: 40%;" ng-click="take_snapshot()">Returns</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div style="display: flex; justify-content: space-evenly; background: lightgray; padding-top: 15px; padding-bottom: 15px; border-bottom-left-radius: 2.5px; border-bottom-right-radius: 2.5px; height: 676px;">
+                <div class="card" style="width: 40rem;">
+                    <div class="card-header">
+                      Equipment
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Hammer</li>
+                      <li class="list-group-item">Drill</li>
+                      <li class="list-group-item">Shovel</li>
+                      <li class="list-group-item">Screwdriver</li>
+                      <li class="list-group-item">Paintbrush</li>
+                      <li class="list-group-item">Plieres</li>
+                      <li class="list-group-item">Wrench</li>
+                    </ul>
+                    <div class="card-header">
+                        Material
+                      </div>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Nail</li>
+                        <li class="list-group-item">Cement</li>
+                        <li class="list-group-item">Paintbucket</li>
+                        <li class="list-group-item">Nut</li>
+                      </ul>
+                  </div>
+                  <div class="card" style="width: 6rem;">
+                    <div class="card-header">
+                      Count
+                    </div>
+                    <ul class="list-group list-group-flush" style="text-align: right;">
+                      <li class="list-group-item">10</li>
+                      <li class="list-group-item">10</li>
+                      <li class="list-group-item">10</li>
+                      <li class="list-group-item">10</li>
+                      <li class="list-group-item">10</li>
+                      <li class="list-group-item">10</li>
+                      <li class="list-group-item">10</li>
+                    <div class="card-header">
+                        Count
+                      </div>
+                      <ul class="list-group list-group-flush" style="text-align: right;">
+                        <li class="list-group-item">10</li>
+                        <li class="list-group-item">10</li>
+                        <li class="list-group-item">10</li>
+                        <li class="list-group-item">10</li>
+                      </ul>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-12">
+                    
+                </div>
+                      
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content" style="width: 630px;">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Name : Wasupun Bank Id : 56468486</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                    <div style="display: flex; justify-content: center; padding-top: 15px; padding-bottom: 15px; border-bottom-left-radius: 2.5px; border-bottom-right-radius: 2.5px;">
+                                            <div class="card" style="width: 50rem; ">
+                                                    <div id="my_result"  style="display: flex; justify-content: center; padding-top: 15px; padding-bottom: 15px;">
+                                                    </div>
+                                                    <div>
+                                                    <div style="display: flex; justify-content: space-evenly;">
+                                                            <div class="card" style="width: 40rem;">
+                                                                    <div class="card-header">
+                                                                      Equipment
+                                                                    </div>
+                                                                    <ul class="list-group list-group-flush">
+                                                                      <li class="list-group-item">Hammer</li>
+                                                                      <li class="list-group-item">Drill</li>
+                                                                    </ul>
+                                                                    <div class="card-header">
+                                                                        Material
+                                                                      </div>
+                                                                      <ul class="list-group list-group-flush">
+                                                                        <li class="list-group-item">Nail</li>
+                                                                        <li class="list-group-item">Cement</li>
+                                                                      </ul>
+                                                                  </div>
+                                                                  <div class="card" style="width: 7rem;">
+                                                                    <div class="card-header">
+                                                                      Count
+                                                                    </div>
+                                                                    <ul class="list-group list-group-flush" style="text-align: right;">
+                                                                      <li class="list-group-item">10</li>
+                                                                      <li class="list-group-item">10</li>
+                                                                    <div class="card-header">
+                                                                        Count
+                                                                      </div>
+                                                                      <ul class="list-group list-group-flush" style="text-align: right;">
+                                                                        <li class="list-group-item">10</li>
+                                                                        <li class="list-group-item">10</li>
+                                                                      </ul>
+                                                                  </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-primary">Save</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+</div>
 </body>
 </html>
